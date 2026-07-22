@@ -21,7 +21,7 @@
 /build
 
 #IDE
-.idea
+/.idea/
 .vscode
 
 # misc
