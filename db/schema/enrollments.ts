@@ -2,15 +2,14 @@ import { pgTable, text, boolean, timestamp, uniqueIndex } from "drizzle-orm/pg-c
 import { users } from "./users";
 import { courses } from "./courses";
 import {sql} from "drizzle-orm";
-import {lessons} from "@/db/schema/lessons";
 import {relations} from "drizzle-orm/_relations";
 
 export const enrollments = pgTable("enrollments", {
   id: text("id").primaryKey().default(sql`gen_random_uuid()`),
-  userId: text("user_id").references(() => users.id).notNull().references(
+  userId: text("user_id").notNull().references(
       () => users.id, { onDelete: "cascade" }
   ),
-  courseId: text("course_id").references(() => courses.id).notNull().references(
+  courseId: text("course_id").notNull().references(
       () => courses.id, { onDelete: "cascade" }
   ),
   completed: boolean("completed").default(false).notNull(),
