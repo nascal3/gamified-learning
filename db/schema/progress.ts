@@ -25,7 +25,7 @@ export const progressRelations = relations(progress, ({ one }) => ({
     references: [users.id]
   }),
   lesson: one(lessons, {
-    fields: [progress.id],
+    fields: [progress.lessonId],
     references: [lessons.id]
   })
 
