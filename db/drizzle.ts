@@ -1,6 +1,9 @@
-import "dotenv/config"
-import { drizzle } from 'drizzle-orm/node-postgres';
-import * as schema from "./schema"
+import "dotenv/config";
+import { drizzle, type NodePgDatabase } from "drizzle-orm/node-postgres";
+import { Pool } from "pg";
+import * as schema from "./schema";
 
-// @ts-ignore
-export const db = drizzle(process.env.DATABASE_URL!, { schema });
+const pool = new Pool({ connectionString: process.env.DATABASE_URL! });
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
+export const db: NodePgDatabase<typeof schema> = drizzle(pool, { schema });
